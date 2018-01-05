@@ -83,7 +83,7 @@ if not settings.DEBUG:
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'icl',
             'USER': 'kenjijrt',
-            'PASSWORD': 'pillen5521',
+            'PASSWORD': 'deredactie',
             # 'HOST': '127.0.0.1',
             # 'PORT': '5432',
         }
@@ -128,12 +128,23 @@ if not settings.DEBUG:
 
     STATIC_URL = '/static/'
 
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR,"static"),
-        )
 
-    STATIC_ROOT = "/home/kenjijrt/webapps/icl_static/static_cdn"
-    #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
-    MEDIA_URL = "/media/"
-    MEDIA_ROOT = "/home/kenjijrt/webapps/icl_static/media_cdn"
-    #MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
+    CORS_REPLACE_HTTPS_REFERER      = True
+    HOST_SCHEME                     = "https://"
+    SECURE_PROXY_SSL_HEADER         = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT             = True
+    SESSION_COOKIE_SECURE           = True
+    CSRF_COOKIE_SECURE              = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
+    SECURE_HSTS_SECONDS             = 1000000
+    SECURE_FRAME_DENY               = True
+
+    # STATICFILES_DIRS = (
+    #     os.path.join(BASE_DIR,"static"),
+    #     )
+
+    # STATIC_ROOT = "/home/kenjijrt/webapps/icl_static/static_cdn"
+    # #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
+    # MEDIA_URL = "/media/"
+    # MEDIA_ROOT = "/home/kenjijrt/webapps/icl_static/media_cdn"
+    # #MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
