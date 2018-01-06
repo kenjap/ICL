@@ -28,7 +28,7 @@ if not settings.DEBUG:
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
 
-    ALLOWED_HOSTS = ['interculturalliving.com']
+    ALLOWED_HOSTS = ['kenjap-blog.herokuapp.com/','interculturalliving.com']
 
 
     # Application definition
@@ -80,14 +80,23 @@ if not settings.DEBUG:
 
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'icl',
-            'USER': 'kenjijrt',
-            'PASSWORD': 'deredactie',
-            # 'HOST': '127.0.0.1',
-            # 'PORT': '5432',
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+
+    # add this
+    import dj_database_url
+    db_from_env = dj_database_url.config()
+    DATABASES['default'].update(db_from_env)
+    DATABASES['default']['CONN_MAX_AGE'] = 500
+    
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #     }
+    # }
 
 
     # Password validation
@@ -139,12 +148,12 @@ if not settings.DEBUG:
     SECURE_HSTS_SECONDS             = 1000000
     SECURE_FRAME_DENY               = True
 
-    # STATICFILES_DIRS = (
-    #     os.path.join(BASE_DIR,"static"),
-    #     )
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR,"static"),
+        )
 
-    # STATIC_ROOT = "/home/kenjijrt/webapps/icl_static/static_cdn"
-    # #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
-    # MEDIA_URL = "/media/"
-    # MEDIA_ROOT = "/home/kenjijrt/webapps/icl_static/media_cdn"
-    # #MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
+    STATIC_ROOT = "/home/kenjijrt/webapps/icl_static/static_cdn"
+    #STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
+    MEDIA_URL = "/media/"
+    MEDIA_ROOT = "/home/kenjijrt/webapps/icl_static/media_cdn"
+    #MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
