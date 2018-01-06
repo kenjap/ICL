@@ -1,4 +1,4 @@
-from urllib import quote_plus
+#from urllib.parse import quote_plus
 
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404,redirect
@@ -37,7 +37,7 @@ def article_detail(request, slug=None):
 	if instance.draft or instance.publish > timezone.now().date() or instance.draft:
 		if not request.user.is_staff or not request.user.is_superuser:
 			raise Http404
-	share_string = quote_plus(instance.content)
+	share_string = urllib.parse.quote_plus(instance.content)
 	context = {
 		"title": instance.title,
 		"instance": instance,
